@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.kosta.finalproject.dto.MemberDTO;
@@ -20,29 +21,30 @@ import lombok.Setter;
 @Table(name = "member_table")
 public class MemberEntity {
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	@Column(name = "member_id")
 	private Long id;
 	
-	@Column(length = 50, unique = true)
+	@Column(name="member_email", length = 50, unique = true)
 	private String memberEmail;
 	
-	@Column(length = 20)
+	@Column(name="member_password", length = 20)
 	private String memberPassword;
 	
-	@Column(length = 20)
+	@Column(name="member_name", length = 20)
 	private String memberName;
 	
-	@Column(length = 20)
+	@Column(name="member_birth", length = 20)
 	private Date memberBirth;
 	
-	@Column(length = 30)
+	@Column(name="member_mobile", length = 30)
 	private String memberMobile;
 	
-	@Column(length = 30)
+	@Column(name="member_license", length = 30)
 	private String memberLicense;
 	
-	@Column(length = 10)
+	@Column(name="member_like", length = 10)
 	private int memberLike;
 	
 	public static MemberEntity toSaveEntity(MemberDTO memberDTO) {

@@ -36,19 +36,29 @@ public class MemberService {
 		 * 일치하면 로그인 성공, 일치하지 않으면 로그인 실패로 처리
 		 */
 		// return false;
-	Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());	
-	if (optionalMemberEntity.isPresent()) {
+		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());	
+	
+		if (optionalMemberEntity.isPresent()) {
+
 			MemberEntity loginEntity = optionalMemberEntity.get();
+			
 			if (loginEntity.getMemberPassword().equals(memberDTO.getMemberPassword())) {
-			return memberDTO.toMemberDTO(loginEntity);
+				
+				return MemberDTO.toMemberDTO(loginEntity);
+			
 			} else {
-			return null;
+				
+				return null;
 			}
-	  }else {
-		 return null;
+			
+		}else {
+			
+			return null;
+		
 		}
 	}
- public MemberDTO findById(Long id) {
+
+	public MemberDTO findById(Long id) {
 	 Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
 	 if (optionalMemberEntity.isPresent()) {
 	//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
@@ -58,7 +68,7 @@ public class MemberService {
 	 } else {
 		 return null;
 	 }
-			 
+		 
  }
 
 public List<MemberDTO> findAll() {
@@ -70,5 +80,11 @@ public List<MemberDTO> findAll() {
 		memberDTOList.add(MemberDTO.toMemberDTO(member));
 	}
 	return memberDTOList;
+}
+
+public void delete(Long id) {
+	memberRepository.deleteById(id);
+	
+	
 }
 	}
