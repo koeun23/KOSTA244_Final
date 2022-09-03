@@ -56,7 +56,7 @@ public class MemberTest {
 		Date memberBirth = date;
 		String memberMobile= "1234";
 		String memberLicense="1234";
-		int memberLike =1;
+		int memberLike =10;
 	
 		MemberDTO memberDTO = new MemberDTO(memberEmail, memberPassword,memberName, memberBirth, memberMobile, memberLicense, memberLike);
 		// Long savedId = memberService.save(memberDTO);
