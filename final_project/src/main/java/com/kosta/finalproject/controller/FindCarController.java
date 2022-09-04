@@ -1,12 +1,14 @@
 package com.kosta.finalproject.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,17 +41,20 @@ public class FindCarController {
 		//@RequestParam : 필수인지 아닌지
 		if(boardnum==null) { //null일 경우 새 보드를 생성해서 타임리프에 넘겨줌
 			model.addAttribute("board",new FindCarBoard());
+			//model.add
 		}else {//id가 값이 있을 경우 보드레파지에서 조회해서 넘겨줌
-			FindCarBoard board = FindCarBoardRepository.findById(boardnum).orElse(null);
+			FindCarBoard board = FindCarBoardRepository.findByboardnum(boardnum);//.orElse(null);
 			model.addAttribute("board", board);
 		}
 		
-		model.addAttribute("board",new FindCarBoard());
+		//model.addAttribute("board",new FindCarBoard());
 		return "/findcarboard/form";
 	}
 	
+	
 	@PostMapping("/form")
-	public String formSubmit(@ModelAttribute FindCarBoard board) {
+	public String formSubmit(@Validated FindCarBoard board, BindingResult bindingResult) {
+	//유효성 검사 어노테이션
 		FindCarBoardRepository.save(board);
 		//save에서 @id 값이 있는 경우엔 update가 실행되고, 없는경우엔 새로 생성됨
 		return "redirect:/findcarboard/list";

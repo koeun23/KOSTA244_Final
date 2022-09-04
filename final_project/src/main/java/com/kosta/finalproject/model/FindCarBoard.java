@@ -21,7 +21,7 @@ public class FindCarBoard {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, 
 					generator = "Find_SEQ_GENERATOR"
 					)
-	private int boardnum;
+	private Integer boardnum;
 	private String userid;
 	private int boardstatus;
 	private String boardtitle;

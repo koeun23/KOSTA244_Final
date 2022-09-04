@@ -6,4 +6,8 @@ import com.kosta.finalproject.model.FindCarBoard;
 
 public interface FindCarBoardRepository  extends JpaRepository<FindCarBoard, Integer> {
 
+
+
+	FindCarBoard findByboardnum(Integer boardnum);
+
 }

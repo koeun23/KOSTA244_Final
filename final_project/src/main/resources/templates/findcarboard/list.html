@@ -27,7 +27,7 @@
   <tbody>
     <tr th:each="board : ${boards}">
       <td th:text="${board.boardnum}">Mark</td>
-      <td><a th:text="${board.boardtitle}" th:href="@{/findcarboard/form(id=${board.boardnum})}">Mark</a></td>
+      <td><a th:text="${board.boardtitle}" th:href="@{/findcarboard/form(boardnum=${board.boardnum})}">Mark</a></td>
       <td th:text="${board.startpoint}">Otto</td>
       <td th:text="${board.endpoint}">@mdo</td>
         <td th:text="${board.starttime}">@mdo</td>
