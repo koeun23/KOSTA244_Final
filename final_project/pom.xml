@@ -80,6 +80,13 @@
 	  		<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
 		
+		<!--NotNull 사용-->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-validation</artifactId>
+    		<version>2.7.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
