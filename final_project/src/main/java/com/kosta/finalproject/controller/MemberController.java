@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,7 +21,9 @@ import com.kosta.finalproject.dto.MemberDTO;
 import com.kosta.finalproject.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -28,14 +31,30 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	private final MemberService memberService;
 	
-	@GetMapping("/save-form")
-	public String saveForm() {
-		return "memberPages/save";
-	}
-	@GetMapping("/login-form")
+	/*로그인 페이지 이동*/
+	@GetMapping("/loginForm")
 	public String loginForm() {
 		return "memberPages/login";
 	}
+
+	/*회원가입 페이지 이동*/
+	@GetMapping("/joinForm")
+	public String joinForm() {
+		return "memberPages/join";
+	}	
+	
+	
+	/*마이페이지 상세보기 이동*/
+	@GetMapping("/myPageForm")
+	public String myPageForm() {
+		return "memberPages/myPage";
+	}	
+
+	/*마이페이지 수정페이지 이동*/
+	@GetMapping("/myPageUpdateForm")
+	public String myPageUpdateForm() {
+		return "memberPages/myPageUpdate";
+	}	
 	
 	@PostMapping("/save")
 	public String save(@ModelAttribute MemberDTO memberDTO) {
@@ -44,17 +63,33 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login (@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+	@ResponseBody
+	public String login (MemberDTO memberDTO, HttpSession session) {
+
+		log.info("memberDTO >>>>>>>>>>>>>>>>> : "+memberDTO.toString());
+		
 		MemberDTO loginResult = memberService.login(memberDTO);
+		
 		if (loginResult != null) {
-			session.setAttribute("loginEmail", loginResult.getMemberEmail());
-			session.setAttribute("id", loginResult.getId());
-			return "memberPages/main";	
+			//로그인정보를 세션에 담는다
+			session.setAttribute("loginInfo", loginResult);
+		//	memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+			
+			return "success";	
 		}else {
-			return "memberPages/login";
+			return "fail";	
 		}
 		
 	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		//모든 세션을 삭제
+		session.invalidate();
+		return "redirect:/home/main";
+		
+	}	
+	
 	@GetMapping("/")
 	public String findAll(Model model) {
 		List<MemberDTO> memberDTOList =memberService.findAll();
