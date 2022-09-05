@@ -23,10 +23,13 @@ public class MemberEntity {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
-	@Column(name = "member_id")
-	private Long id;
+	@Column(name = "member_no")
+	private Long memberNo;
+
+	@Column(name="member_id", length = 255)
+	private String memberId;
 	
-	@Column(name="member_email", length = 50, unique = true)
+	@Column(name="member_email", length = 50)
 	private String memberEmail;
 	
 	@Column(name="member_password", length = 20)
@@ -49,6 +52,7 @@ public class MemberEntity {
 	
 	public static MemberEntity toSaveEntity(MemberDTO memberDTO) {
 		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setMemberId(memberDTO.getMemberId());		
 		memberEntity.setMemberEmail(memberDTO.getMemberEmail());
 		memberEntity.setMemberPassword(memberDTO.getMemberEmail());
 		memberEntity.setMemberName(memberDTO.getMemberName());

@@ -11,14 +11,13 @@ import lombok.Data;
 
 //운전자를 구하는 게시판 테이블
 @Entity
-@Table(name="findCarBoard_tbl")
+@Table(name="findCarBoard_tbl") //오라클에 있는테이블명과 맵핑해야하는
 @Data
 public class findCarBoard {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, 
-					generator = "findcarboard_seq")
-	private int findCarBoardNum;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int boardnum;
 	
 	@Column(nullable=false, length=50)
 	private String id;
