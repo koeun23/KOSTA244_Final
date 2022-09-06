@@ -18,7 +18,7 @@ allocationSize=1
 )
 public class FindCarBoard {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
 					generator = "Find_SEQ_GENERATOR"
 					)
 	private Integer boardnum;

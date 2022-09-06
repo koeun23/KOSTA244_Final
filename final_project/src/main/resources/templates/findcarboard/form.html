@@ -35,13 +35,14 @@
         </div>
         <div class="form-group">
 
-          
+
         </div>
 
         <div class="text-align:right">
           <br>
           <a type="button"  th:href="@{/findcarboard/list}">취소</a>
           <button type="submit">저장</button>
+          <a th:href="@{/findcarboard/delete(boardnum=${board.boardnum})}">글 삭제</a>
         </div>
         
     </form>

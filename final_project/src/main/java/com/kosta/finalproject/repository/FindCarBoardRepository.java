@@ -9,5 +9,5 @@ public interface FindCarBoardRepository  extends JpaRepository<FindCarBoard, Int
 
 
 	FindCarBoard findByboardnum(Integer boardnum);
-
+	FindCarBoard deleteByboardnum(Long boardnum);
 }

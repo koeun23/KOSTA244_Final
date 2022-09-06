@@ -1,10 +1,10 @@
 package com.kosta.finalproject.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -47,7 +47,6 @@ public class FindCarController {
 			model.addAttribute("board", board);
 		}
 		
-		//model.addAttribute("board",new FindCarBoard());
 		return "/findcarboard/form";
 	}
 	
@@ -60,5 +59,12 @@ public class FindCarController {
 		return "redirect:/findcarboard/list";
 		//redirect로 페이지 이동함
 	}
+	
+	@Transactional
+	@GetMapping("/delete")
+    public String boardDelete(Model model, Integer boardnum){
+		FindCarBoardRepository.deleteByboardnum(Long.valueOf(boardnum));
+		return "redirect:/findcarboard/list";
+    }
 
 }
