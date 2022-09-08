@@ -19,7 +19,7 @@ public class MemberDTO {
 		private String memberEmail;
 		private String memberPassword;
 		private String memberName;
-		private Date  memberBirth;
+		private String memberBirth;
 		private String memberMobile;
 		private String memberLicense;
 		private int memberLike;
@@ -44,7 +44,7 @@ public class MemberDTO {
 
 
 
-		public MemberDTO(String memberEmail, String memberPassword, String memberName, Date memberBirth,
+		public MemberDTO(String memberEmail, String memberPassword, String memberName, String memberBirth,
 				String memberMobile, String memberLicense, int memberLike) {
 			super();
 			this.memberEmail = memberEmail;
