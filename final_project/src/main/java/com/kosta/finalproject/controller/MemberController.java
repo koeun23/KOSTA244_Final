@@ -23,6 +23,18 @@ import com.kosta.finalproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+* @packageName    : com.kosta.finalproject.controller
+* @fileName        : MemberController.java
+* @author        : Hye
+* @date            : 2022.09.09
+* @description   : 회원 관리 컨트롤러
+* ===========================================================
+* DATE              AUTHOR             NOTE
+* -----------------------------------------------------------
+* 2022.09.09        Hye       최초 생성
+*/
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -30,87 +42,91 @@ import lombok.extern.slf4j.Slf4j;
 
 public class MemberController {
 	private final MemberService memberService;
-	
-	/*로그인 페이지 이동*/
-	@GetMapping("/loginForm")
-	public String loginForm() {
-		return "memberPages/login";
-	}
 
-	/*회원가입 페이지 이동*/
+	/**
+	* @methodName    : joinForm
+	* @author        : Hye
+	* @date        : 2022.09.09
+	* @description   :  회원가입 페이지 이동
+	* @return
+	*/
 	@GetMapping("/joinForm")
 	public String joinForm() {
-		return "memberPages/join";
+		return "member/joinForm";
 	}	
 	
-	
-	/*마이페이지 상세보기 이동*/
+	/**
+	* @methodName    : myPageForm
+	* @author        : Hye
+	* @date        : 2022.09.09
+	* @description   : 마이페이지 상세보기 이동
+	* @return
+	*/
 	@GetMapping("/myPageForm")
 	public String myPageForm() {
-		return "memberPages/myPage";
+		return "member/myPage";
 	}	
 
 	/*마이페이지 수정페이지 이동*/
 	@GetMapping("/myPageUpdateForm")
 	public String myPageUpdateForm() {
-		return "memberPages/myPageUpdate";
+		return "member/myPageUpdateForm";
+	}	
+
+	/*비밀번호 수정페이지 이동*/
+	@GetMapping("/passwordUpdateForm")
+	public String passwordUpdateForm() {
+		return "member/passwordUpdateForm";
 	}	
 	
 	@PostMapping("/save")
 	public String save(@ModelAttribute MemberDTO memberDTO) {
+		
+		log.info("memberDTO : "+memberDTO.toString());
+		
 		memberService.save(memberDTO);
-		return "redirect:/member/loginForm";
+		return "redirect:/login/loginForm";
 	}
-	
-	@PostMapping("/login")
-	@ResponseBody
-	public String login (MemberDTO memberDTO, HttpSession session) {
-
-		log.info("memberDTO >>>>>>>>>>>>>>>>> : "+memberDTO.toString());
-		
-		MemberDTO loginResult = memberService.login(memberDTO);
-		
-		if (loginResult != null) {
-			//로그인정보를 세션에 담는다
-			session.setAttribute("loginInfo", loginResult);
-		//	memberDTO = (MemberDTO) session.getAttribute("loginInfo");
-			
-			return "success";	
-		}else {
-			return "fail";	
-		}
-		
-	}
-
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		//모든 세션을 삭제
-		session.invalidate();
-		return "redirect:/home/main";
-		
-	}	
 	
 	@GetMapping("/")
 	public String findAll(Model model) {
 		List<MemberDTO> memberDTOList =memberService.findAll();
 		model.addAttribute("memberList", memberDTOList);
-		return "memberPages/list";
+		return "member/list";
 		
 	}
-	// /member/3
-	//  /member?id=3
-	@GetMapping("/{id}")
-	public String findById(@PathVariable Long id, Model model) {
-		MemberDTO memberDTO = memberService.findById(id);
-		model.addAttribute("member",memberDTO);
-		return "memberPages/detail";
+	
+	
+	/**
+	* @methodName    : findById
+	* @author        : Hye
+	* @date        : 2022.09.09
+	* @description   :  아이디 중복검사
+	* @param memberId
+	* @param model
+	* @return
+	*/
+	@GetMapping("/idChk/{memberId}")
+	@ResponseBody
+	public String findByMemberId(@PathVariable String memberId) {
 		
+		String result = "";
+		
+		MemberDTO memberDTO = memberService.findById(memberId);
+		
+		if(memberDTO != null) {
+			result = "N";
+		}else {
+			result = "Y";
+		}
+		
+		return result;
 		
 	}
 	//ajax상세 조회
 	@PostMapping("/ajax/{id}")
-	public @ResponseBody MemberDTO findByIdAjax(@PathVariable Long id) {
-		MemberDTO memberDTO = memberService.findById(id);
+	public @ResponseBody MemberDTO findByIdAjax(@PathVariable String memberId) {
+		MemberDTO memberDTO = memberService.findById(memberId);
 		return memberDTO;
 	}
 	
@@ -118,7 +134,7 @@ public class MemberController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id ) {
 		memberService.delete(id);
-		return "redirect:/member/";
+		return "redirect:/member/loginForm";
 	//	return"memberPages.list";//X
 	}
 	

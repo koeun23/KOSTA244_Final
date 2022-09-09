@@ -12,6 +12,4 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long>{
 	//매개변수: MemberId(String)
 	Optional<MemberEntity> findByMemberId(String memberId);
 
-
-
 }

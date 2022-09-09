@@ -37,6 +37,13 @@ public class MemberService {
 		
 		memberDTO.setMemberPassword(encodePw);
 		
+		//생년월일의 값이 있을때만 생년월일의 하이픈("-") 을 없앰
+		if(!"".equals(memberDTO.getMemberBirth().toString())){
+			String memberBirth = memberDTO.getMemberBirth().toString().replace("-", "");
+			log.info("memberBirth : "+memberBirth);
+			memberDTO.setMemberBirth(memberBirth);;
+		}
+		
 		//MemberEntity memberEntity = memberRepository.save(MemberEntity.toSaveEntity(memberDTO)); 						
 		MemberEntity memberEntity = MemberEntity.toSaveEntity(memberDTO);
 		
@@ -88,8 +95,8 @@ public class MemberService {
 		}
 	}
 
-	public MemberDTO findById(Long id) {
-	 Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+	public MemberDTO findById(String memberId) {
+	 Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberId);
 	 if (optionalMemberEntity.isPresent()) {
 	//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
 		 MemberEntity memberEntity = optionalMemberEntity.get();

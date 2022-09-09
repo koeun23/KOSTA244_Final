@@ -2,11 +2,17 @@ package com.kosta.finalproject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.finalproject.controller.MemberController;
+import com.kosta.finalproject.dto.MemberDTO;
+
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 /**
 * @packageName    : kr.co
@@ -28,18 +34,42 @@ import lombok.extern.log4j.Log4j2;
 // 2) postHandle()란? 핸들러가 실행은 완료 되었지만 아직 View가 생성되기 이전에 호출된다.
 // 3) afterCompletion()란? 모든 View에서 최종 결과를 생성하는 일을 포함한 모든 작업이 완료된 후에 실행된다.
 
-@Log4j2
+@Slf4j
 public class LoginIntercepter implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    	log.info("호출한 컨트롤러 주소는? : {}", request.getRequestURI());
+
+    	//컨트롤러 리퀘스트맵핑 주소를 호출하기전에 로그인 세션을 체크한다.
+    	 HttpSession session = request.getSession();
+    	 
+    	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+
+    	/*
+        if(ObjectUtils.isEmpty(loginInfo)){
+       	 	log.info("로그인 정보가 없습니다.");
+        	response.sendRedirect("/login/loginForm");
+            return false;
+        }else{
+       	 	log.info("로그인 정보가 있습니다. : "+loginInfo.toString());
+        	session.setMaxInactiveInterval(30*60);
+            return true;
+        }
+        */
+
+        if(!ObjectUtils.isEmpty(loginInfo)){
+       	 	log.info("로그인 정보는? : "+loginInfo.toString());
+        }
+    	
     	return true;
+        
+
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
     	log.info("view로 보내기전 작업은? : {}", response.getStatus());
+
     }
 
     @Override
