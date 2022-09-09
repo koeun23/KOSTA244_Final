@@ -15,7 +15,7 @@
 						
 						<!-- 타임리프 로그인 세션 체크 하기, 세션이 없으면-->
             			<th:block th:if="${session.loginInfo == null}">
-                        	<li class="nav-item"><a class="nav-link" th:href="@{/member/loginForm}">로그인</a></li>
+                        	<li class="nav-item"><a class="nav-link" th:href="@{/login/loginForm}">로그인</a></li>
 	                        <li class="nav-item"><a class="nav-link" th:href="@{/member/joinForm}">회원가입</a></li>
 						</th:block>
 						
@@ -58,7 +58,7 @@
 					   	cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 					}).then(function(result){
 						if(result.isConfirmed == true){		
-							location.href="/member/logout";
+							location.href="/login/logout";
 						}
 					});		
 				});
