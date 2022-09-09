@@ -59,7 +59,7 @@ public class MemberController {
 	@PostMapping("/save")
 	public String save(@ModelAttribute MemberDTO memberDTO) {
 		memberService.save(memberDTO);
-		return "memberPages/login";
+		return "redirect:/member/loginForm";
 	}
 	
 	@PostMapping("/login")

@@ -39,7 +39,7 @@ public class MemberEntity {
 	private String memberName;
 	
 	@Column(name="member_birth", length = 20)
-	private Date memberBirth;
+	private String memberBirth;
 	
 	@Column(name="member_mobile", length = 30)
 	private String memberMobile;
@@ -54,7 +54,7 @@ public class MemberEntity {
 		MemberEntity memberEntity = new MemberEntity();
 		memberEntity.setMemberId(memberDTO.getMemberId());		
 		memberEntity.setMemberEmail(memberDTO.getMemberEmail());
-		memberEntity.setMemberPassword(memberDTO.getMemberEmail());
+		memberEntity.setMemberPassword(memberDTO.getMemberPassword());
 		memberEntity.setMemberName(memberDTO.getMemberName());
 		memberEntity.setMemberBirth(memberDTO.getMemberBirth());
 		memberEntity.setMemberMobile(memberDTO.getMemberMobile());
