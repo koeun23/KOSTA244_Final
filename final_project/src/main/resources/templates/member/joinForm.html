@@ -175,17 +175,31 @@ layout:decorate="~{layout/layout}"  란?
             $("#memberPasswordCheckMsg").hide();                
             
         }).on("blur", function () {
+
             let _value = $(this).val();
+
             if ($.trim(_value) == "") {
                 $("#memberPasswordErrMsg").show();
             }
+            
+            let result = chkPwd(_value);
+            
+            if(result){
+           		console.log("진입");
+                $("#memberPasswordErrMsg").show();
+                $("#memberPasswordErrMsg").html(result);        
+            }
+            
             let pwdConfirm = $("#memberPasswordConfirm").val();
+            
             if (pwdConfirm != _value && pwdConfirm != "") {
                 $("#memberPasswordCheckMsg").html("비밀번호가 일치하지 않습니다.");
                 $("#memberPasswordCheckMsg").show();
                 return false;
             }
+            
             chkSubmitBtn();
+            
         });
 
 		// 비밀번호 확인, 이름 입력 감지 이벤트
@@ -282,9 +296,12 @@ layout:decorate="~{layout/layout}"  란?
          *
          * @return boolean
          */
-        function isValidEmail(Email) {
-            var EMAIL_PATTERN = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}/;
+		function isValidEmail(Email) {
+		
+    		var EMAIL_PATTERN = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}/;
+            
             Email = $.trim((Email));
+            
             if (Email.match(EMAIL_PATTERN) == null) {
                 return false;
             } else {
@@ -305,6 +322,37 @@ layout:decorate="~{layout/layout}"  란?
         function fncIsValidPhoneNumber(s) {
             return /^(82|0)1(0|1|6|7|8|9)\d{3,4}\d{4}/.test(String(s).replace(/[^0-9]/g, ""));
         }
+        
+        /**------------------------------------------------------------------
+         * 비밀번호 유효성 검사
+         */        
+        function chkPwd(str){
+        
+       		let result = "";
+       		
+    		let pw = str; 
+    		let num = pw.search(/[0-9]/g); 
+    		let eng = pw.search(/[a-z]/ig); 
+    		let spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);  
+        	
+        	//8자리 ~ 20자리 이내로 입력해주세요.
+    		if(pw.length < 8 || pw.length > 20){  
+    			result = "8~20자리 이내로 입력해주세요.";
+    		} 
+        	
+        	//비밀번호는 공백업이 입력해주세요.
+    		if(pw.search(/₩s/) != -1){  
+				result = "비밀번호는 공백없이 입력해주세요";
+        	} 
+        	
+        	//영문,숫자, 특수문자를 혼합하여 입력해주세요.
+    		if(num < 0 || eng < 0 || spe < 0 ){  
+				result = "문자, 숫자, 특수문자를 혼합하여 입력해주세요.";
+    		}  
+    		
+    		return result;
+    		
+     	}
         
     </script>
 </th:block>

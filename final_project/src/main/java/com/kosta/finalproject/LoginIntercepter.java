@@ -42,23 +42,13 @@ public class LoginIntercepter implements HandlerInterceptor {
 
     	//컨트롤러 리퀘스트맵핑 주소를 호출하기전에 로그인 세션을 체크한다.
     	 HttpSession session = request.getSession();
-    	 
     	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 
-    	/*
+    	//로그인 세션정보를 인터셉터에서 체크한다. 없으면 로그인 페이지로 이동, 접근 통제는 WebConfig.java에서함
         if(ObjectUtils.isEmpty(loginInfo)){
-       	 	log.info("로그인 정보가 없습니다.");
-        	response.sendRedirect("/login/loginForm");
-            return false;
-        }else{
-       	 	log.info("로그인 정보가 있습니다. : "+loginInfo.toString());
-        	session.setMaxInactiveInterval(30*60);
-            return true;
-        }
-        */
-
-        if(!ObjectUtils.isEmpty(loginInfo)){
-       	 	log.info("로그인 정보는? : "+loginInfo.toString());
+    		log.info("로그인 정보가 업습니다.");
+    		//로그인정보가 없으면 로그인 페이지로 강제이동
+        	response.sendRedirect("/login/loginForm"); //이건 컨트롤러 리퀘스트 맵핑주소
         }
     	
     	return true;

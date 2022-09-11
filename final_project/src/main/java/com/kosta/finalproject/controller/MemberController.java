@@ -60,7 +60,7 @@ public class MemberController {
 	* @author        : Hye
 	* @date        : 2022.09.09
 	* @description   : 마이페이지 상세보기 이동
-	* @return
+	* @return	
 	*/
 	@GetMapping("/myPageForm")
 	public String myPageForm() {
@@ -138,7 +138,7 @@ public class MemberController {
 	//	return"memberPages.list";//X
 	}
 	
-	 /**
+	/**
 	  * /member/3: 조회(get) R, 저장(post) C, 수정(put) U, 삭제(delete)  D
 	  */
 	
