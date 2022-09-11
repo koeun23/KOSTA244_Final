@@ -39,9 +39,11 @@ public class MemberService {
 		
 		//생년월일의 값이 있을때만 생년월일의 하이픈("-") 을 없앰
 		if(!"".equals(memberDTO.getMemberBirth().toString())){
+
 			String memberBirth = memberDTO.getMemberBirth().toString().replace("-", "");
 			log.info("memberBirth : "+memberBirth);
 			memberDTO.setMemberBirth(memberBirth);;
+		
 		}
 		
 		//MemberEntity memberEntity = memberRepository.save(MemberEntity.toSaveEntity(memberDTO)); 						
@@ -96,32 +98,79 @@ public class MemberService {
 	}
 
 	public MemberDTO findById(String memberId) {
-	 Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberId);
-	 if (optionalMemberEntity.isPresent()) {
-	//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberId);
+	 
+		if (optionalMemberEntity.isPresent()) {
+			//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
 		 MemberEntity memberEntity = optionalMemberEntity.get();
 		 MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
 		 return memberDTO;
-	 } else {
-		 return null;
-	 }
-		 
- }
-
-public List<MemberDTO> findAll() {
-	List<MemberEntity> memberEntityList = memberRepository.findAll();
-	List<MemberDTO> memberDTOList = new ArrayList<>();
-	for (MemberEntity member: memberEntityList) {
-		//MemberDTO memberDTO = MemberDTO.toMemberDTO(member);
-		//memberDTOList.add(memberDTO);
-		memberDTOList.add(MemberDTO.toMemberDTO(member));
+		} else {
+			return null;
+		}
 	}
-	return memberDTOList;
-}
 
-public void delete(Long id) {
-	memberRepository.deleteById(id);
+	public List<MemberDTO> findAll() {
+		List<MemberEntity> memberEntityList = memberRepository.findAll();
+		List<MemberDTO> memberDTOList = new ArrayList<>();
+		for (MemberEntity member: memberEntityList) {
+			//MemberDTO memberDTO = MemberDTO.toMemberDTO(member);
+			//memberDTOList.add(memberDTO);
+			memberDTOList.add(MemberDTO.toMemberDTO(member));
+		}
+		return memberDTOList;
+	}
+
+	public void delete(Long id) {
+		memberRepository.deleteById(id);
+	}
+
 	
+	/*아이디 찾기 > 메일주소, 이름으로 찾는다. */
+	public MemberDTO findByMemberEmailAndMemberName(MemberDTO memberDTO) {
+		
+		String memberEmail = memberDTO.getMemberEmail();
+		String memberName = memberDTO.getMemberName();
+		
+		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmailAndMemberName(memberEmail, memberName);
+	 
+		if (optionalMemberEntity.isPresent()) {
+			
+			//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+			
+			MemberEntity memberEntity = optionalMemberEntity.get();
+
+			MemberDTO resultDTO = MemberDTO.toMemberDTO(memberEntity);
+
+			return resultDTO;
+		
+		} else {
+			return null;
+		}
+	}
+
+	/*비밀번호 찾기 >아이디, 이름으로 찾는다. */
+	public MemberDTO findByMemberIdAndMemberName(MemberDTO memberDTO) {
+		
+		String memberName = memberDTO.getMemberName();
+		String memberId = memberDTO.getMemberId();
+		
+		
+		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberIdAndMemberName(memberId, memberName);
+	 
+		if (optionalMemberEntity.isPresent()) {
+			
+			//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+			
+			MemberEntity memberEntity = optionalMemberEntity.get();
+
+			MemberDTO resultDTO = MemberDTO.toMemberDTO(memberEntity);
+
+			return resultDTO;
+		
+		} else {
+			return null;
+		}
+	}
 	
 }
-	}
