@@ -26,17 +26,17 @@
   </thead>
   <tbody>
     <tr th:each="board : ${boards}">
-      <td th:text="${board.boardnum}">Mark</td>
-      <td><a th:text="${board.boardtitle}" th:href="@{/findcarboard/form(boardnum=${board.boardnum})}">Mark</a></td>
-      <td th:text="${board.startpoint}">Otto</td>
-      <td th:text="${board.endpoint}">@mdo</td>
-        <td th:text="${board.starttime}">@mdo</td>
-      <td th:text="${board.userid}">@mdo</td>
+      <td th:text="${board.boardNo}">Mark</td>
+      <td><a th:text="${board.boardTitle}" th:href="@{/board/form(boardNo=${board.boardNo})}">Mark</a></td>
+      <td th:text="${board.boardStartpoint}">Otto</td>
+      <td th:text="${board.boardEndpoint}">@mdo</td>
+        <td th:text="${board.boardStarttime}">@mdo</td>
+      <td th:text="${board.memberId}">@mdo</td>
     </tr>
   </tbody>
 </table>
   <div class="text-align:right">
-    <a type="button" th:href="@{/findcarboard/form}">글올리기</a>
+    <a type="button" th:href="@{/board/form}">글올리기</a>
   </div>
 	
 </body>

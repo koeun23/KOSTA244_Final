@@ -2,12 +2,15 @@ package com.kosta.finalproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kosta.finalproject.model.FindCarBoard;
-
-public interface BoardRepository  extends JpaRepository<FindCarBoard, Integer> {
+import com.kosta.finalproject.model.Board;
 
 
 
-	//FindCarBoard findByboardnum(Integer boardnum);
-	FindCarBoard deleteByboardnum(Long boardnum);
+public interface BoardRepository  extends JpaRepository<Board, Integer> {
+
+	Board findByboardNo(Long boardNo);
+
+	void deleteByboardNo(Long boardNo);
+
+	
 }

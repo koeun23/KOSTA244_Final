@@ -38,7 +38,7 @@ public class Board {
 	private String boardTitle;
 	
 	@Column(name="BOARD_STARTPOINT")
-	private String boardStartoint;
+	private String boardStartpoint;
 	
 	@Column(name="BOARD_ENDPOINT")
 	private String boardEndpoint;
