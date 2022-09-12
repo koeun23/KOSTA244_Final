@@ -53,16 +53,20 @@ layout:decorate="~{layout/layout}"  란?
                             <div  id="findIdResultErrMsg"style="display:none; color:#dc3545; font-size: 0.875em;">회원정보가 없습니다.</div>
 			                <br/>
 	                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">찾기</button></div>
-                		</form>
+							<br/>
+							<p class=h7>비밀번호를 잊어버리셨나요?&nbsp;&nbsp;<a  th:href="@{/login/findPwForm}">비밀번호 찾기</a></p>
+							<p class=h7>아직 회원이 아니신가요?&nbsp;&nbsp;<a  th:href="@{/member/joinForm}">회원가입</a></p>
+							<p class=h7><a  th:href="@{/login/loginForm}">로그인</a>&nbsp; 페이지 바로가기</p>
+						</form>
 	                </div>
 	            </div>
 	        </div>
 	    </section> 
 
  		<script>
- 		
+ 		//멤버의 이메일과 이름에 포커스 //off&on이 같이 쓰인 이유는?
 	        $("#memberEmail, #memberName").off().on("focus", function () {
-
+		//id를 조회하였을 때 
 	            let _id = $(this).attr('id')
 	            $("#" + _id + "ErrMsg").hide();
 

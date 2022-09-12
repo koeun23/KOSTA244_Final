@@ -53,6 +53,10 @@ layout:decorate="~{layout/layout}"  란?
                             <div  id="findPwResultErrMsg"style="display:none; color:#dc3545; font-size: 0.875em;">회원정보가 없습니다.</div>
 			                <br/>
 	                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">찾기</button></div>
+							</br>
+							<p class=h7>아이디를 잊어버리셨나요?&nbsp;&nbsp;<a  th:href="@{/login/findIdForm}">아이디 찾기</a></p>
+							<p class=h7>아직 회원이 아니신가요?&nbsp;&nbsp;<a  th:href="@{/member/joinForm}">회원가입</a></p>
+							<p class=h7><a  th:href="@{/login/loginForm}">로그인</a>&nbsp; 페이지 바로가기</p>
 	                    </form>
 	                </div>
 	            </div>

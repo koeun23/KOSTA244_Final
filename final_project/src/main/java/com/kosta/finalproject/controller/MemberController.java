@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,15 +57,30 @@ public class MemberController {
 	}	
 	
 	/**
-	* @methodName    : myPageForm
+	* @methodName    : myPage
 	* @author        : Hye
 	* @date        : 2022.09.09
 	* @description   : 마이페이지 상세보기 이동
 	* @return	
 	*/
-	@GetMapping("/myPageForm")
-	public String myPageForm() {
+	@GetMapping("/myPage")
+	public String myPage(Model model, HttpSession session) {
+		
+		Long memberNo = null;
+		
+		//로그인 세션정보를 dto에 맵핑한다.
+   	 	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+
+   	 	//로그인 세션정보가 있을때
+        if(!ObjectUtils.isEmpty(loginInfo)){
+        	//dto에서 회원번호를 가져와서 변수에 담는다.
+        	memberNo = loginInfo.getMemberNo();
+        	//회원번호로 회원정보를 데이터베이스에서 조회 후 html에서 사용하기위하여 모델 객체에 담는다.
+        	model.addAttribute("memberInfo", memberService.findByMemberNo(memberNo));
+        }
+		
 		return "member/myPage";
+		
 	}	
 
 	/*마이페이지 수정페이지 이동*/
@@ -112,7 +128,7 @@ public class MemberController {
 		
 		String result = "";
 		
-		MemberDTO memberDTO = memberService.findById(memberId);
+		MemberDTO memberDTO = memberService.findByMemberId(memberId);
 		
 		if(memberDTO != null) {
 			result = "N";
@@ -126,7 +142,7 @@ public class MemberController {
 	//ajax상세 조회
 	@PostMapping("/ajax/{id}")
 	public @ResponseBody MemberDTO findByIdAjax(@PathVariable String memberId) {
-		MemberDTO memberDTO = memberService.findById(memberId);
+		MemberDTO memberDTO = memberService.findByMemberId(memberId);
 		return memberDTO;
 	}
 	

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class MemberDTO {
-		private Long meberNo;
+		private Long memberNo;
 		private String memberId;
 		private String memberEmail;
 		private String memberPassword;
@@ -28,7 +28,7 @@ public class MemberDTO {
 		
 		public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
 			MemberDTO memberDTO = new MemberDTO();
-			memberDTO.setMeberNo(memberEntity.getMemberNo());
+			memberDTO.setMemberNo(memberEntity.getMemberNo());
 			memberDTO.setMemberId(memberEntity.getMemberId());
 			memberDTO.setMemberEmail(memberEntity.getMemberEmail());
 			memberDTO.setMemberPassword(memberEntity.getMemberPassword());

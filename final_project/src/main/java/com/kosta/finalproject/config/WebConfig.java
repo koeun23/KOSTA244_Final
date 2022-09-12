@@ -31,9 +31,14 @@ public class WebConfig implements WebMvcConfigurer {
             	//   해당 url로 접근 시에는 인터셉터 체크를 적용하지 않게 한다.
         
         		//   addPathPatterns는 인터셉터 체크를 적용할 url 패턴을 설정한다. 
-              	//   *, **등을 사용한 URI Pattern String을 전송하거나, URI Pattern 배열을 전송할 수 있다.
+              	//   *, **등을 사용한 URI Pattern String을 전0.1259송하거나, URI Pattern 배열을 전송할 수 있다.
               	// 게시판 작성페이지, 게시판 등록 프로세스는 로그인한 사용자만 접근가능 하기때문에 인터셉터 체크를 적용한다.
-                .addPathPatterns("/member/myPageForm","/member/myPageUpdateForm","/member/passwordUpdateForm");
+        		// 비로그인 접근을 막으려면 아래의 배열에 리퀘스트맵핑주소 추가하세요
+                .addPathPatterns(
+            		"/member/myPage"
+            		, "/member/myPageUpdateForm"
+            		, "/member/passwordUpdateForm"
+            	);
 
     }
 	

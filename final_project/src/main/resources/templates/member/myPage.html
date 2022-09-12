@@ -32,108 +32,99 @@ layout:decorate="~{layout/layout}"  란?
 			<div class="container bootstrap snippets bootdey">
 			<div class="panel-body inf-content">
 			    <div class="row">
+					&nbsp;
 			        <div class="col-md-6">
-			            <strong>회원정보</strong><br>
+						&nbsp;
+			            <p class="h5">회원정보</p>
 			            <div class="table-responsive">
-			            <table class="table table-user-information">
-			                <tbody>
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
-			                                Id                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pika     
-			                        </td>
-			                    </tr>
-			                    <tr>    
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-user  text-primary"></span>    
-			                                Name                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pikachu
-			                        </td>
-			                    </tr>
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-cloud text-primary"></span>  
-			                                Email                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pikapika@naver.com 
-			                        </td>
-			                    </tr>
-			
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
-			                                Mobile                                              
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            010-2222-2222 
-			                        </td>
-			                    </tr>
-			
-			
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
-			                                Birth                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            03/03/03
-			                        </td>
-			                    </tr>
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
-			                                License                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            111-11-11-111  
-			                        </td>
-			                    </tr>
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-			                                Like                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            5
-			                        </td>
-			                    </tr>
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-			                                Optional                                               
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                        Optional
-			                        </td>
-			                    </tr>                                    
-			                </tbody>
-			            </table>
+				            <table class="table table-user-information">
+				                <tbody>
+				                    <tr>        
+				                        <td>
+				                            <strong>
+			                                	<span class="glyphicon glyphicon-asterisk text-primary"></span>
+				                                Id                                                
+				                            </strong>
+				                        </td>
+			                        	<td class="text-primary"  th:text="${memberInfo.memberId}" ></td>
+				                    </tr>
+				                    <tr>    
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-user  text-primary"></span>    
+				                            	Name
+				                            </strong>
+				                        </td>
+				                        <td   class="text-primary" th:text="${memberInfo.memberName}" ></td>
+				                    </tr>
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-cloud text-primary"></span>  
+				                                Email                                                
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary"  th:text="${memberInfo.memberEmail}"  ></td>
+				                    </tr>
+				
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
+				                                Mobile                                              
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary"  th:text="${memberInfo.memberMobile}"  ></td>
+				                    </tr>
+				
+				
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
+				                                Birth                                                
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary" th:text="${memberInfo.memberBirth}" ></td>
+				                    </tr>
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
+				                                License                                                
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary" th:text="${memberInfo.memberLicense}" ></td>
+				                    </tr>
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+				                                Like                                                
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary" th:text="${memberInfo.memberLike}" >
+				                        </td>
+				                    </tr>
+				                    <tr>        
+				                        <td>
+				                            <strong>
+				                                <span class="glyphicon glyphicon-calendar text-primary"></span>
+				                                Optional                                               
+				                            </strong>
+				                        </td>
+				                        <td class="text-primary">
+				                        Optional
+				                        </td>
+				                    </tr>                                    
+				                </tbody>
+				            </table>
 			            </div>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-right">
+									<!-- &nbsp; 란? 태그간 간격읠 한칸 띄어준다 -->
+									&nbsp;
 									<button type="button" id="submit" name="submit" class="btn btn-primary">비밀번호 수정하기</button>
 									<button type="button" id="submit" name="submit" class="btn btn-primary">회원정보 수정하기</button>
 								</div>
