@@ -1,6 +1,8 @@
 package com.kosta.finalproject.service;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,7 +99,8 @@ public class MemberService {
 		}
 	}
 
-	public MemberDTO findById(String memberId) {
+	/*회원 아이디로 회원정보 조회하기*/
+	public MemberDTO findByMemberId(String memberId) {
 		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberId);
 	 
 		if (optionalMemberEntity.isPresent()) {
@@ -150,27 +153,79 @@ public class MemberService {
 	}
 
 	/*비밀번호 찾기 >아이디, 이름으로 찾는다. */
-	public MemberDTO findByMemberIdAndMemberName(MemberDTO memberDTO) {
+	public String tempPwUpdate(MemberDTO memberDTO) {
 		
-		String memberName = memberDTO.getMemberName();
+		//임시비밀번호 변수 생셩
+		String tempPw = "";
+		
 		String memberId = memberDTO.getMemberId();
-		
+		String memberName = memberDTO.getMemberName();
 		
 		Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberIdAndMemberName(memberId, memberName);
-	 
-		if (optionalMemberEntity.isPresent()) {
-			
-			//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
-			
-			MemberEntity memberEntity = optionalMemberEntity.get();
-
-			MemberDTO resultDTO = MemberDTO.toMemberDTO(memberEntity);
-
-			return resultDTO;
 		
-		} else {
-			return null;
+		//아이디와 이름으로 회원정보가 조회가 된다
+		if (optionalMemberEntity.isPresent()) {
+
+			MemberEntity memberEntity = optionalMemberEntity.get();
+			
+			//랜덤 비밀번호 생성
+			tempPw = getRamdomPassword(8);
+
+			log.info("1. 암호화 전 비밀번호는 ? : "+tempPw);
+			
+			// 암호화 모듈로 들어가서 리턴된 값이 String encodePw에 들어감
+			String encodePw = passwordEncoder.encode(tempPw);
+			
+			//임시비밀번호 dto에 set
+			memberEntity.setMemberPassword(encodePw);
+				
+			Long savedId = memberRepository.save(memberEntity).getMemberNo();
+				
+			log.info("2. 업데이트 실행한 MEMBER_NO :  "+savedId);
+			
+			return tempPw;
+		
+		}else {	
+			return "";
 		}
 	}
 	
+	/*임시비밀번호 발급 로직*/
+    public String getRamdomPassword(int size) {
+    	
+    	char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                '!', '@', '#', '$', '%', '^', '&' };
+
+        StringBuffer sb = new StringBuffer();
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(new Date().getTime());
+
+        int idx = 0;
+        int len = charSet.length;
+        for (int i=0; i<size; i++) {
+            // idx = (int) (len * Math.random());
+            idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
+            sb.append(charSet[idx]);
+        }
+
+        return sb.toString();
+    }
+
+    /*회원 번호로 회원정보 조회하기*/
+    public MemberDTO findByMemberNo(Long memberNo) {
+		Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(memberNo);
+	 
+		if (optionalMemberEntity.isPresent()) {
+			//	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+		 MemberEntity memberEntity = optionalMemberEntity.get();
+		 MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+		 return memberDTO;
+		} else {
+			return null;
+		}
+
+	}
 }

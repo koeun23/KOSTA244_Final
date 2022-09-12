@@ -52,6 +52,7 @@ public class MemberEntity {
 	
 	public static MemberEntity toSaveEntity(MemberDTO memberDTO) {
 		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setMemberNo(memberDTO.getMemberNo());
 		memberEntity.setMemberId(memberDTO.getMemberId());		
 		memberEntity.setMemberEmail(memberDTO.getMemberEmail());
 		memberEntity.setMemberPassword(memberDTO.getMemberPassword());

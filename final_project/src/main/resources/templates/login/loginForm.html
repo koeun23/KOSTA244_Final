@@ -46,7 +46,8 @@ layout:decorate="~{layout/layout}"  란?
 	                            <label for="memberPassword">비밀번호</label>
 	                            <div class="invalid-feedback" id="memberPasswordErrMsg"style="display:none;">비밀번호를 입력해주세요.</div>
 	                        </div>
-	                        <!-- 로그인  Button-->
+	                        <!-- 버튼 영역 -->
+	                        <!--
 			                <div class="panel-body">
 			                    <div class="form-group">
 			                			<p class=h8>Need help signing in?</p>			                    
@@ -54,9 +55,12 @@ layout:decorate="~{layout/layout}"  란?
 			                            <a th:href="@{/login/findPwForm}" class="btn btn-primary btn-block" role="button">비밀번호 찾기</a>
 			                    </div>
 			                </div>
+			               -->
 			                <br/>
 	                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">Login</button></div>
 	                        <br/>
+							<p class=h7>비밀번호를 잊어버리셨나요?&nbsp;&nbsp;<a  th:href="@{/login/findPwForm}">비밀번호 찾기</a></p>
+							<p class=h7>아이디를 잊어버리셨나요?&nbsp;&nbsp;<a  th:href="@{/login/findIdForm}">아이디 찾기</a></p>
 			                <p class=h7>아직 회원이 아니신가요?&nbsp;&nbsp;<a  th:href="@{/member/joinForm}">회원가입</a></p>
 	                    </form>
 	                </div>
