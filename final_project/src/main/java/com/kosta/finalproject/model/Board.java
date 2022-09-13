@@ -59,7 +59,7 @@ class StringToDate implements AttributeConverter<String, Date> {
 
 	@Override
 	public Date convertToDatabaseColumn(String attribute) {
-		// 2018-06-07T00:00
+		// 2018-06-07 00:00
 		java.util.Date date = null;
 		System.out.println("attribute : " + attribute);
 		String st = attribute.replace("T", " ");
