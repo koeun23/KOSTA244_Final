@@ -74,102 +74,111 @@ layout:decorate="~{layout/layout}"  란?
 	</head>      
 	<th:block layout:fragment="content">
 		<!-- Contact section-->
-	    <section class="bg-light py-5">
-			<div class="container">
-			<div class="row gutters">
-			<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-			<div class="card h-100">
-				<div class="card-body">
-					<div class="account-settings">
-						<div class="user-profile">
-							<div class="user-avatar">
-								<img th:src="@{/images/carvroong2.png}" alt="Maxwell Admin">
+		<form id="updateForm"	method="POST"	 action="/member/memberUpdate">
+			<input type="hidden"	name="memberNo"	th:value="${memberInfo.memberNo}"	>
+			<input type="hidden"	name="memberPassword"	th:value="${memberInfo.memberPassword}"	>
+		    <section class="bg-light py-5">
+				<div class="container">
+					<div class="row gutters">
+						<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+							<div class="card h-100">
+								<div class="card-body">
+									<div class="account-settings">
+										<div class="user-profile">
+											<div class="user-avatar">
+												<img th:src="@{/images/carvroong2.png}" alt="Maxwell Admin">
+											</div>
+											<h5 class="user-name" th:text="${memberInfo.memberId}"></h5>
+											<h6 class="user-email" th:text="${memberInfo.memberEmail}"></h6>
+										</div>
+										<!--
+										<div class="about">
+											<h5>About</h5>
+											<p>I'm Pikachu. I hate Ash... Lol</p>
+										</div>
+										-->
+									</div>
+								</div>
 							</div>
-							<h5 class="user-name">Pikachu</h5>
-							<h6 class="user-email">pikapika@naver.com</h6>
 						</div>
-						<div class="about">
-							<h5>About</h5>
-							<p>I'm Pikachu. I hate Ash... Lol</p>
+						<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+							<div class="card h-100">
+								<div class="card-body">
+									<div class="row gutters">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<h6 class="mb-2 text-primary">Personal Details</h6>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="memberId">Id</label>
+												<input type="text" class="form-control" id="memberId" name="memberId"	th:value="${memberInfo.memberId}"	 readonly placeholder="Enter full id">
+											</div>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="memberName">Name</label>
+												<input type="text" class="form-control" id="memberName" name="memberName"	th:value="${memberInfo.memberName}"	placeholder="Enter full name">
+											</div>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="control">Email</label>
+												<input type="email" class="form-control" id="memberEmail" name="memberEmail"	th:value="${memberInfo.memberEmail}"	placeholder="Enter email">
+											</div>
+										</div>
+									</div>
+									<div class="row gutters">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<h6 class="mt-3 mb-2 text-primary">Details</h6>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="memberMobile">Mobile</label>
+												<input type="text" class="form-control" id="memberMobile" name="memberMobile"	th:value="${memberInfo.memberMobile}"	placeholder="Enter mobile number">
+											</div>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="memberBirth">Birth</label>
+												<input type="text" class="form-control" id="memberBirth" name="memberBirth"	th:value="${memberInfo.memberBirth}"		placeholder="Enter birth">
+											</div>
+										</div>
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="memberLicense">License</label>
+												<input type="text" class="form-control" id="memberLicense" name="memberLicense"	th:value="${memberInfo.memberLicense}"		placeholder="Enter driver license number">
+											</div>
+										</div>
+										<!--
+										<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+											<div class="form-group">
+												<label for="">기타</label>
+												<input type="text" class="form-control" placeholder="Optional">
+											</div>
+										</div>
+										-->
+									</div>
+									<br/>
+									<div class="row gutters">
+										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+											<div class="text-right">
+												<button type="button" id="btnMyPage"  class="btn btn-secondary">취소</button>
+												<button type="submit"  class="btn btn-primary">수정하기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-			<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-			<div class="card h-100">
-				<div class="card-body">
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<h6 class="mb-2 text-primary">Personal Details</h6>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="fullName">Id</label>
-								<input type="text" class="form-control" id="fullName" placeholder="Enter full id">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="password">Password</label>
-								<input type="text" class="form-control" id="eMail" placeholder="Enter password">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="phone">Name</label>
-								<input type="text" class="form-control" id="name" placeholder="Enter full name">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="email">Email</label>
-								<input type="email" class="form-control" id="Email" placeholder="Enter email">
-							</div>
-						</div>
-					</div>
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<h6 class="mt-3 mb-2 text-primary">Details</h6>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="Mobile">Mobile</label>
-								<input type="text" class="form-control" id="mobile" placeholder="Enter mobile number">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="ciTy">Birth</label>
-								<input type="text" class="form-control" id="birth" placeholder="Enter birth">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="sTate">License</label>
-								<input type="text" class="form-control" id="license" placeholder="Enter driver license number">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-							<div class="form-group">
-								<label for="zIp">Optional</label>
-								<input type="text" class="form-control" id="optional" placeholder="Optional">
-							</div>
-						</div>
-					</div>
-					<div class="row gutters">
-						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-							<div class="text-right">
-								<button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-								<button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-			</div>
-			</div>
-	    </section>
+		    </section>
+	    </form>
+		<script>
+				/*비밀번호 변경페이지 이동*/
+				$("#btnMyPage").click(function(){		
+					location.href="/member/myPage";
+				});
+		</script>
 	</th:block>
 </html>
