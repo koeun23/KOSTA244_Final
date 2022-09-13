@@ -41,6 +41,7 @@ public class BoardController {
 		//boardNo가 null인지 판단하기 위헤 Integer 사용, int&Long은 null체크 못함
 		//@RequestParam : 필수인지 아닌지
 		if(boardNo==null) { //null일 경우 새 보드를 생성해서 타임리프에 넘겨줌
+			
 			model.addAttribute("board",new Board());
 			//model.add
 		}else {//id가 값이 있을 경우 보드레파지에서 조회해서 넘겨줌
@@ -55,6 +56,8 @@ public class BoardController {
 	@PostMapping("/form")
 	public String formSubmit(@Validated Board board, BindingResult bindingResult) {
 	//유효성 검사 어노테이션
+		//System.out.println("시간시간시간"+board.getBoardStarttime());
+		System.out.println("@@보드보드"+board.getBoardStarttime());
 		BoardRepository.save(board);
 		//save에서 @id 값이 있는 경우엔 update가 실행되고, 없는경우엔 새로 생성됨
 		return "redirect:/board/list";
