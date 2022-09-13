@@ -67,7 +67,6 @@ public class MemberController {
 	public String myPage(Model model, HttpSession session) {
 		
 		Long memberNo = null;
-		
 		//로그인 세션정보를 dto에 맵핑한다.
    	 	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 
@@ -85,14 +84,59 @@ public class MemberController {
 
 	/*마이페이지 수정페이지 이동*/
 	@GetMapping("/myPageUpdateForm")
-	public String myPageUpdateForm() {
+	public String myPageUpdateForm(Model model, HttpSession session) {
+
+		log.info("myPageUpdateForm 페이지이동 ");
+		
+		Long memberNo = null;
+		//로그인 세션정보를 dto에 맵핑한다.
+   	 	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+
+   	 	//로그인 세션정보가 있을때
+        if(!ObjectUtils.isEmpty(loginInfo)){
+        	//dto에서 회원번호를 가져와서 변수에 담는다.
+        	memberNo = loginInfo.getMemberNo();
+        	//회원번호로 회원정보를 데이터베이스에서 조회 후 html에서 사용하기위하여 모델 객체에 담는다.
+        	model.addAttribute("memberInfo", memberService.findByMemberNo(memberNo));
+        }
 		return "member/myPageUpdateForm";
+		
 	}	
 
+	/*JPA 수정하기 html에서 수정하기버튼 눌렀을때 아래의 url로 호출함*/
+	@PostMapping("/memberUpdate")
+	public String memberUpdate(@ModelAttribute MemberDTO memberDTO) {
+
+		log.info("memberDTO : "+memberDTO.toString());
+		
+		//1. 숙제 회원정보 수정하기.
+		//2. html에서 받은 DTO를 업데이트하시오
+		//수정하는 로직 작성부분
+		
+		
+		return "redirect:/member/myPage";		//수정 후 마이페이지로 이동하기
+		
+	}	
+	
 	/*비밀번호 수정페이지 이동*/
 	@GetMapping("/passwordUpdateForm")
-	public String passwordUpdateForm() {
+	public String passwordUpdateForm(Model model, HttpSession session) {
+
+		log.info("passwordUpdateForm 페이지이동 ");
+		
+		Long memberNo = null;
+		//로그인 세션정보를 dto에 맵핑한다.
+   	 	MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+
+   	 	//로그인 세션정보가 있을때
+        if(!ObjectUtils.isEmpty(loginInfo)){
+        	//dto에서 회원번호를 가져와서 변수에 담는다.
+        	memberNo = loginInfo.getMemberNo();
+        	//회원번호로 회원정보를 데이터베이스에서 조회 후 html에서 사용하기위하여 모델 객체에 담는다.
+        	model.addAttribute("memberInfo", memberService.findByMemberNo(memberNo));
+        }
 		return "member/passwordUpdateForm";
+		
 	}	
 	
 	@PostMapping("/save")
@@ -102,10 +146,12 @@ public class MemberController {
 		
 		memberService.save(memberDTO);
 		return "redirect:/login/loginForm";
+		
 	}
 	
 	@GetMapping("/")
 	public String findAll(Model model) {
+
 		List<MemberDTO> memberDTOList =memberService.findAll();
 		model.addAttribute("memberList", memberDTOList);
 		return "member/list";
@@ -137,8 +183,8 @@ public class MemberController {
 		}
 		
 		return result;
-		
 	}
+	
 	//ajax상세 조회
 	@PostMapping("/ajax/{id}")
 	public @ResponseBody MemberDTO findByIdAjax(@PathVariable String memberId) {
@@ -157,8 +203,6 @@ public class MemberController {
 	/**
 	  * /member/3: 조회(get) R, 저장(post) C, 수정(put) U, 삭제(delete)  D
 	  */
-	
-	
 	
 		//delete요청 삭제
 	@DeleteMapping("/{id}")
