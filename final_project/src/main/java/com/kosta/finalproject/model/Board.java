@@ -51,6 +51,8 @@ public class Board {
 	@Convert(converter=StringToDate.class)
 	private String boardStarttime;
 
+
+
 }
 
 @Converter
