@@ -44,7 +44,7 @@ public class LoginController {
 	*/
 	@GetMapping("/loginForm")
 	public String loginForm() {
-		return "login/loginForm";
+		return "/login/loginForm";
 	}
 	
 	@PostMapping("/login")
@@ -76,7 +76,7 @@ public class LoginController {
 	/*아이디 찾기 페이지 이동*/
 	@GetMapping("/findIdForm")
 	public String findIdForm() {
-		return "login/findIdForm";
+		return "/login/findIdForm";
 	}	
 
 	/*아이디 찾기 조회*/
@@ -103,7 +103,7 @@ public class LoginController {
 	/*비밀번호 찾기 페이지 이동*/
 	@GetMapping("/findPwForm")
 	public String findPwForm() {
-		return "login/findPwForm";
+		return "/login/findPwForm";
 	}
 
 	/*비밀번호 찾기 조회*/

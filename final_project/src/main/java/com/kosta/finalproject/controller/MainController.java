@@ -21,7 +21,7 @@ public class MainController {
 		//게시판인서트하면 작성자가 > 로그인한사람이 됨
 		
 		
-		return "home/main"; 
+		return "/home/main"; 
 	}
 
 }
