@@ -63,6 +63,7 @@ public class MemberController {
 	* @description   : 마이페이지 상세보기 이동
 	* @return	
 	*/
+	
 	@GetMapping("/myPage")
 	public String myPage(Model model, HttpSession session) {
 		
