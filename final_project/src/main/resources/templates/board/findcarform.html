@@ -16,7 +16,7 @@
 	<body>
 		<div class="container">
 			<h2>FindCar게시판글쓰기</h2>
-			<form action="#" th:action="@{/board/form}" th:object="${board}" method="post">
+			<form action="#" th:action="@{/board/findcarform}" th:object="${board}" method="post">
 				<!-- 같은 페이지에서 이동시 form action="#"을 사용함 -->
 				<input type="hidden" id="boardnum" th:field="*{boardNo}">
 				<div class="form-group">
@@ -48,7 +48,7 @@
 
 				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="text-right">
-						<a type="button" th:href="@{/board/list}" class="btn btn-primary">돌아가기</a>&nbsp;
+						<a type="button" th:href="@{/board/findcarlist}" class="btn btn-primary">돌아가기</a>&nbsp;
 						
 						<th:block th:if="${session.loginInfo.memberId == board.memberId}">
 						<button type="submit" class="btn btn-primary" id="findcarsave">저장</button>&nbsp;
@@ -75,7 +75,7 @@
 					}).then(function(result){
 						if(result.isConfirmed == true){		
 							alert("삭제되었습니다");
-							 location.href="/board/delete?boardNo="+memberId;
+							 location.href="/board/findcardelete?boardNo="+memberId;
 						
 						}
 					});		

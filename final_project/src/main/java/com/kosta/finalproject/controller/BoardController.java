@@ -23,7 +23,6 @@ import com.kosta.finalproject.repository.BoardRepository;
 //뷰와 모델의 다리역할, 뷰로부터 사용자의 인터랙션을 받아 모델에 전달하고, 
 //바뀐 모델 데이터를 뷰에 다시 전달하여 업데이트함
 @Controller //
-//@SessionAttributes("memberId") 
 @RequestMapping("/board")
 public class BoardController {
 	
@@ -31,17 +30,17 @@ public class BoardController {
 	private BoardRepository BoardRepository;
 	
 	
-	@GetMapping("/list")
+	@GetMapping("/findcarlist")
 	public String list(Model model) {
 		//model에 원하는 값을 넘겨주면됨
 		List<Board> boards = BoardRepository.findAll();
 		//List<Board> boards = BoardRepository.findStatus2();
 		model.addAttribute("boards",boards);
-		return "/board/list";
+		return "/board/findcarlist";
 	}
 	
 	// 글 쓰기 및 글 수정
-	@GetMapping("/form")
+	@GetMapping("/findcarform")
 	public String form(Model model, @RequestParam(required = false) Long boardNo,
 						HttpSession session){
 
@@ -57,24 +56,24 @@ public class BoardController {
 			model.addAttribute("board", board);
 		}
 		
-		return "/board/form";
+		return "/board/findcarform";
 	}
 	
 	
-	@PostMapping("/form")
+	@PostMapping("/findcarform")
 	public String formSubmit(@Validated Board board, BindingResult bindingResult) {
 	//유효성 검사 어노테이션
 		board.setBoardStatus(2);
 		BoardRepository.save(board);
-		return "redirect:/board/list";
+		return "redirect:/board/findcarlist";
 		//redirect로 페이지 이동함
 	}
 	
 	@Transactional
-	@GetMapping("/delete")
+	@GetMapping("/findcardelete")
     public String boardDelete(Model model, Integer boardNo){
 		BoardRepository.deleteByboardNo(Long.valueOf(boardNo));
-		return "redirect:/board/list";
+		return "redirect:/board/findcarlist";
     }
 
 }
