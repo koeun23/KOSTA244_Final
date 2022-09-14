@@ -47,13 +47,11 @@ public class BoardController {
 
 		if(boardNo==null) { //null일 경우 새 보드를 생성해서 타임리프에 넘겨줌
 			Board board = new Board();
-			
 			//로그인 세션 유지해서 글 쓸때 ID 자동으로 입력되게함
 			MemberDTO memberDto = (MemberDTO) session.getAttribute("loginInfo");
 			board.setMemberId(memberDto.getMemberId());
 			board.setBoardStatus(2);
 			model.addAttribute("board",board);
-			//model.add
 		}else {//id가 값이 있을 경우 보드레파지에서 조회해서 넘겨줌
 			Board board = BoardRepository.findByboardNo(boardNo);//.orElse(null);
 			model.addAttribute("board", board);
